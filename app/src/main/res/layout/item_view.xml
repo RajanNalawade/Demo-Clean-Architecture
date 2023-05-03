@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="mUser"
+            type="com.example.democleanarchitecture.database.entities.User" />
+
+        <variable
+            name="clickListener"
+            type="com.example.democleanarchitecture.utils.OnItemClickUserList" />
+    </data>
+
+    <LinearLayout android:id="@+id/ll_item_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:onClick="@{() -> clickListener.onUserClick(mUser)}"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtInitial"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="@{mUser.name}"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:background="@drawable/item_red" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingStart="16dp"
+            android:textSize="20dp"
+            android:text="@{mUser.name}"
+            android:fontFamily="sans-serif" />
+
+    </LinearLayout>
+</layout>
