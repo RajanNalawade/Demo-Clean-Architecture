@@ -41,10 +41,6 @@ class MainActivity : AppCompatActivity(), OnItemClickUserList {
         //val mUserRepository = UserRepository(mUserDAO)
         //mMainViewModel = ViewModelProvider(this, MainViewModelFactory(mUserRepository)).get(MainViewModel::class.java)
 
-        val id = mMainViewModel.getUsers().value?.size ?: 0
-
-        mMainViewModel.insertUser(User(id.toLong(), "B", "sw", Date(), true))
-
         val rvUser = binding.rvUser
         userAdpater.setOnItemClickUserList(this)
 
