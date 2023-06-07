@@ -38,9 +38,11 @@ class MainActivity : AppCompatActivity(), OnItemClickUserList {
         val rvUser = binding.rvUser
         val userAdpater = UserListAdapter(this)
 
-        rvUser.layoutManager = LinearLayoutManager(this)
-        rvUser.hasFixedSize()
-        rvUser.adapter= userAdpater
+        rvUser.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            hasFixedSize()
+            adapter = userAdpater
+        }
 
         rvUser.addItemDecoration(
             DividerItemDecoration(

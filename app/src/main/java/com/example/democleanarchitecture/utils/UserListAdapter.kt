@@ -8,13 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.democleanarchitecture.database.entities.User
 import com.example.democleanarchitecture.databinding.ItemViewBinding
 
-class UserListAdapter(private val mListener: OnItemClickUserList): ListAdapter<User, UserListAdapter.UserViewHolder>(ListDifferentiator()){
+class UserListAdapter(private val mListener: OnItemClickUserList) :
+    ListAdapter<User, UserListAdapter.UserViewHolder>(ListDifferentiator()) {
 
     private lateinit var binding: ItemViewBinding
 
-    class UserViewHolder(private val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root){
+    class UserViewHolder(private val binding: ItemViewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: User, listener: OnItemClickUserList){
+        fun bind(item: User, listener: OnItemClickUserList) {
             binding.mUser = item
             binding.clickListener = listener
         }
@@ -31,13 +33,13 @@ class UserListAdapter(private val mListener: OnItemClickUserList): ListAdapter<U
         holder.bind(mUser, mListener)
     }
 
-    class ListDifferentiator : DiffUtil.ItemCallback<User>(){
+    class ListDifferentiator : DiffUtil.ItemCallback<User>() {
         override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-            return  oldItem.id == newItem.id
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-            return  oldItem == newItem
+            return oldItem == newItem
         }
 
     }
