@@ -3,8 +3,9 @@ package com.example.democleanarchitecture.utils
 import androidx.lifecycle.LiveData
 import com.example.democleanarchitecture.database.daos.UserDAO
 import com.example.democleanarchitecture.database.entities.User
+import javax.inject.Inject
 
-class UserRepository(private val mUserDAO: UserDAO) {
+class UserRepository @Inject constructor(private val mUserDAO: UserDAO) {
 
     suspend fun insertUser(mUser: User){
         mUserDAO.insertUser(mUser)

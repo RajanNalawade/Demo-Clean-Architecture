@@ -36,7 +36,7 @@
             android:layout_weight="1"
             android:paddingStart="16dp"
             android:textSize="20dp"
-            android:text="@{mUser.name}"
+            android:text="@{mUser.name + ` to ` + mUser.id}"
             android:fontFamily="sans-serif" />
 
     </LinearLayout>

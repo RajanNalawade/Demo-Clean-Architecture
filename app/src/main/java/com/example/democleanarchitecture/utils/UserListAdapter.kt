@@ -7,9 +7,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.democleanarchitecture.database.entities.User
 import com.example.democleanarchitecture.databinding.ItemViewBinding
+import javax.inject.Inject
 
-class UserListAdapter(private val mListener: OnItemClickUserList) :
+class UserListAdapter @Inject constructor() :
     ListAdapter<User, UserListAdapter.UserViewHolder>(ListDifferentiator()) {
+
+    private lateinit var mListener: OnItemClickUserList
+
+    fun setOnItemClickUserList(listener: OnItemClickUserList){
+        mListener = listener
+    }
 
     private lateinit var binding: ItemViewBinding
 

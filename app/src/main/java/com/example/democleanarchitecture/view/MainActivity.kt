@@ -2,6 +2,7 @@ package com.example.democleanarchitecture.view
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -17,26 +18,35 @@ import com.example.democleanarchitecture.utils.UserListAdapter
 import com.example.democleanarchitecture.utils.UserRepository
 import com.example.democleanarchitecture.view_models.MainViewModel
 import com.example.democleanarchitecture.view_models.MainViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), OnItemClickUserList {
 
     lateinit var binding: ActivityMainBinding
-    lateinit var mMainViewModel: MainViewModel
+
+    private val mMainViewModel: MainViewModel by viewModels<MainViewModel>()
+
+    @Inject
+    lateinit var userAdpater : UserListAdapter
     var increament = 0L;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val mUserDAO = UserDatabase.getUserDatabase(this).getUserDao()
-        val mUserRepository = UserRepository(mUserDAO)
-        mMainViewModel = ViewModelProvider(this, MainViewModelFactory(mUserRepository)).get(MainViewModel::class.java)
+        //val mUserDAO = UserDatabase.getUserDatabase(this).getUserDao()
+        //val mUserRepository = UserRepository(mUserDAO)
+        //mMainViewModel = ViewModelProvider(this, MainViewModelFactory(mUserRepository)).get(MainViewModel::class.java)
 
-        mMainViewModel.insertUser(User(1, "B", "sw", Date(), true))
+        val id = mMainViewModel.getUsers().value?.size ?: 0
+
+        mMainViewModel.insertUser(User(id.toLong(), "B", "sw", Date(), true))
 
         val rvUser = binding.rvUser
-        val userAdpater = UserListAdapter(this)
+        userAdpater.setOnItemClickUserList(this)
 
         rvUser.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)

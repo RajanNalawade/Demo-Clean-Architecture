@@ -5,10 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.democleanarchitecture.database.entities.User
 import com.example.democleanarchitecture.utils.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val userRepository: UserRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
     fun insertUser(mUser: User){
         viewModelScope.launch {
